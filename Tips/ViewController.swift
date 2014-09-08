@@ -17,17 +17,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var withTipLabel: UILabel!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet var CurrencyView: UIView!
+    @IBOutlet weak var currencyView: UIView!
     
+    @IBOutlet weak var entryView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        withTipLabel.hidden = true
-        totalLabel.hidden = true
-        withTipLabel.hidden = true
-        eightteenLabel.hidden = true
-        twentyLabel.hidden = true
-        twentytwoLabel.hidden = true
+        
+        totalLabel.text = ""
+        withTipLabel.text = ""
+        eightteenLabel.text = ""
+        twentyLabel.text = ""
+        twentytwoLabel.text = ""
         segmentControl.hidden = true
+
         
         billField.becomeFirstResponder()
     }
@@ -38,7 +42,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onEditingChange(sender: AnyObject) {
-        
+        println("editingchange")
         var tipPercentages = [0.18, 0.2, 0.22]
         var tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
         var billAmount = NSString(string: billField.text).doubleValue
@@ -47,27 +51,27 @@ class ViewController: UIViewController {
         var eighteen = tipPercentages[0] * billAmount
         var twenty = tipPercentages[1] * billAmount
         var twentytwo = tipPercentages[2] * billAmount
-        
-        withTipLabel.hidden = false
-        totalLabel.hidden = false
-        withTipLabel.hidden = false
-        eightteenLabel.hidden = false
-        twentyLabel.hidden = false
-        twentytwoLabel.hidden = false
+
         segmentControl.hidden = false
-
-
         
         totalLabel.text = String(format: "$%.2f", total)
         eightteenLabel.text = String(format: "$%.2f", eighteen)
         twentyLabel.text = String(format: "$%.2f", twenty)
         twentytwoLabel.text = String(format: "$%.2f", twentytwo)
+        withTipLabel.text = ("With Tip")
+
+  /*      self.CurrencyView.alpha = 0
+        UIView.animateWithDuration(0.7, animations: {
+            // This causes first view to fade in and second view to fade out
+            self.CurrencyView.alpha = 1
+            }, completion:(true)
+        )}
+*/
         
     }
 
     @IBAction func onTap(sender: AnyObject) {
         view.endEditing(true)
     }
-    
 }
 

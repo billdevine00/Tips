@@ -9,20 +9,27 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var eightteenLabel: UILabel!
     @IBOutlet weak var twentyLabel: UILabel!
     @IBOutlet weak var twentytwoLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
-    
+    @IBOutlet weak var withTipLabel: UILabel!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        tipLabel.text = "$0.00"
-        totalLabel.text = "$0.00"
+        withTipLabel.hidden = true
+        totalLabel.hidden = true
+        withTipLabel.hidden = true
+        eightteenLabel.hidden = true
+        twentyLabel.hidden = true
+        twentytwoLabel.hidden = true
+        segmentControl.hidden = true
+        
+        billField.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,13 +38,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onEditingChange(sender: AnyObject) {
-      /*  var billAmount = NSString(string: billField.text).doubleValue
-        var tip = billAmount * 0.2
-        var total = billAmount + tip
-        
-        tipLabel.text = "\(tip)"
-        totalLabel.text = "\(total)"
-        */
         
         var tipPercentages = [0.18, 0.2, 0.22]
         var tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
@@ -48,7 +48,15 @@ class ViewController: UIViewController {
         var twenty = tipPercentages[1] * billAmount
         var twentytwo = tipPercentages[2] * billAmount
         
-        
+        withTipLabel.hidden = false
+        totalLabel.hidden = false
+        withTipLabel.hidden = false
+        eightteenLabel.hidden = false
+        twentyLabel.hidden = false
+        twentytwoLabel.hidden = false
+        segmentControl.hidden = false
+
+
         
         totalLabel.text = String(format: "$%.2f", total)
         eightteenLabel.text = String(format: "$%.2f", eighteen)
